@@ -1,58 +1,70 @@
-import { Link as RouterLink } from 'react-router-dom';
-import { Button, Grid, Link, TextField, Typography } from '@mui/material';
-import { Google } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
+import { Button, Form, Input, Space } from 'antd';
+import {
+  GoogleOutlined
+} from '@ant-design/icons';
 import { AuthLayout } from '../layout/AuthLayout';
 
+const validateMessages = {
+  required: '${label} is required!',
+  types: {
+    email: '${label} is not a valid email!',
+  },
+};
 
-export const LoginPage = () => {
-  return (
+const onFinish = (values) => {
+  console.log(values);
+};
+
+export const LoginPage = () => (
     <AuthLayout title="Login">
-      <form>
-          <Grid container>
-            <Grid item xs={ 12 } sx={{ mt: 2 }}>
-              <TextField 
-                label="Correo" 
-                type="email" 
-                placeholder='correo@google.com' 
-                fullWidth
-              />
-            </Grid>
-
-            <Grid item xs={ 12 } sx={{ mt: 2 }}>
-              <TextField 
-                label="Contraseña" 
-                type="password" 
-                placeholder='Contraseña' 
-                fullWidth
-              />
-            </Grid>
-            
-            <Grid container spacing={ 2 } sx={{ mb: 2, mt: 1 }}>
-              <Grid item xs={ 12 } sm={ 6 }>
-                <Button variant='contained' fullWidth>
-                  Login
-                </Button>
-              </Grid>
-              <Grid item xs={ 12 } sm={ 6 }>
-                <Button variant='contained' fullWidth>
-                  <Google />
-                  <Typography sx={{ ml: 1 }}>Google</Typography>
-                </Button>
-              </Grid>
-            </Grid>
-
-
-            <Grid container direction='row' justifyContent='end'>
-              <Link component={ RouterLink } color='inherit' to="/auth/register">
-                Crear una cuenta
-              </Link>
-            </Grid>
-
-          </Grid>
-
-
-        </form>
-
+      <Form
+        name="login"
+        onFinish={ onFinish }
+        validateMessages={ validateMessages }
+      >
+        <Form.Item
+          name="email"
+          label="Email"
+          rules={[
+            {
+              type: 'email',
+              required: true,
+            },
+          ]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          name="password"
+          label="Password"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Input.Password
+            placeholder="input password"
+          />
+        </Form.Item>
+        <Space>
+        <Form.Item>
+            <Button type="primary" htmlType="submit">
+              Login
+            </Button>
+        </Form.Item>
+        <Form.Item>
+            <Button type="primary" htmlType="submit" icon={<GoogleOutlined />}>
+              Google
+            </Button>
+        </Form.Item>
+        </Space>
+      </Form>
+      <Space>
+      <Link to="/auth/register">
+        Crear una cuenta
+      </Link>
+      </Space>
     </AuthLayout>
-  )
-}
+);

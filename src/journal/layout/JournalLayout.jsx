@@ -1,27 +1,51 @@
-import { Toolbar } from '@mui/material';
-import { Box } from '@mui/system'
+import React from 'react';
+import { Layout, theme } from 'antd';
 import { NavBar, SideBar } from '../components';
 
+const { Header, Content, Footer, Sider } = Layout;
 
-const drawerWidth = 280;
 
 export const JournalLayout = ({ children }) => {
+  const {
+    token: { colorBgContainer },
+  } = theme.useToken();
   return (
-    <Box sx={{ display: 'flex' }}>
-
-        <NavBar drawerWidth={ drawerWidth } />
-
-        <SideBar drawerWidth={ drawerWidth } />
-
-        <Box 
-            component='main'
-            sx={{ flexGrow: 1, p: 3 }}
+    <Layout hasSider>
+      <Sider
+        style={{
+          overflow: 'auto',
+          height: '100vh',
+          position: 'fixed',
+          left: 0,
+          top: 0,
+          bottom: 0,
+          background: colorBgContainer
+        }}
+      >
+        <div className="demo-logo-vertical" />
+        <SideBar></SideBar>
+      </Sider>
+      <Layout
+        className="site-layout"
+        style={{
+          marginLeft: 200,
+          marginRight: 10,
+        }}
+      >
+        <Header style={{ background: colorBgContainer }}>
+          <NavBar></NavBar>
+        </Header>
+        <Content>
+          { children }
+        </Content>
+        <Footer
+          style={{
+            textAlign: 'center',
+          }}
         >
-            <Toolbar />
-
-            { children }
-            
-        </Box>
-    </Box>
-  )
-}
+          Footer dummy content
+        </Footer>
+      </Layout>
+    </Layout>
+  );
+};

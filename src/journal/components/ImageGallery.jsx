@@ -1,21 +1,20 @@
-import { ImageListItem, ImageList } from '@mui/material';
-
+import { Row, Col } from 'antd';
 
 export const ImageGallery = () => {
 
   return (
-    <ImageList sx={{ width: '100%', height: 500 }} cols={4} rowHeight={200}>
+    <Row>
       { itemData.map((item) => (
-        <ImageListItem key={item.img}>
+        <Col key={item.img} span={6}>
           <img
-            src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-            srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+            src={`${item.img}?w=152&h=152&fit=crop&auto=format`}
+            srcSet={`${item.img}?w=152&h=152&fit=crop&auto=format&dpr=2 2x`}
             alt={item.title}
             loading="lazy"
           />
-        </ImageListItem>
+        </Col>
       ))}
-    </ImageList>
+    </Row>
   );
 }
 
