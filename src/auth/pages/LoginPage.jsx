@@ -33,7 +33,7 @@ export const LoginPage = () => (
             },
           ]}
         >
-          <Input />
+          <Input autoComplete='on' />
         </Form.Item>
         <Form.Item
           name="password"
@@ -46,6 +46,7 @@ export const LoginPage = () => (
         >
           <Input.Password
             placeholder="input password"
+            autoComplete='off'
           />
         </Form.Item>
         <Space>
