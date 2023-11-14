@@ -7,7 +7,7 @@ export const JournalPage = () => {
   return (
     <JournalLayout>
 
-      <NoteView />
+      <NothingSelectedView />
       {/* <NoteView /> */}
 
       <FloatButton onClick={() => console.log('click')}/>
