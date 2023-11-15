@@ -1,4 +1,5 @@
-import { useDispatch } from 'react-redux';
+import { useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button, Form, Input, Space } from 'antd';
 import {
@@ -16,7 +17,10 @@ const validateMessages = {
 
 export const LoginPage = () => {
   const [form] = Form.useForm();
+  const { status } = useSelector( state => state.auth );
   const dispatch = useDispatch();
+  const isAuthenticating = useMemo(() => status === 'checking', [status]);
+  console.log('isAuthenticating', isAuthenticating);
 
   const onFinish = (values) => {
     dispatch(checkingAuthentication());
@@ -66,7 +70,11 @@ export const LoginPage = () => {
         </Form.Item>
         <Space>
         <Form.Item>
-            <Button type="primary" htmlType="submit">
+            <Button
+            type="primary"
+            htmlType="submit"
+            disabled={ isAuthenticating }
+            >
               Login
             </Button>
         </Form.Item>
@@ -75,6 +83,7 @@ export const LoginPage = () => {
             onClick={ onGoogleSignIn }
             type="primary"
             icon={<GoogleOutlined />}
+            disabled={ isAuthenticating }
             >
               Google
             </Button>
