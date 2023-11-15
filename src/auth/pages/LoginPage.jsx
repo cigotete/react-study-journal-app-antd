@@ -1,11 +1,11 @@
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button, Form, Input, Space } from 'antd';
 import {
   GoogleOutlined
 } from '@ant-design/icons';
 import { AuthLayout } from '../layout/AuthLayout';
-import { useDispatch, useSelector } from 'react-redux';
-import { checkingAuthentication } from '../../store/auth'
+import { checkingAuthentication, startGoogleSignIn } from '../../store/auth'
 
 const validateMessages = {
   required: '${label} is required!',
@@ -27,7 +27,7 @@ export const LoginPage = () => {
   };
 
   const onGoogleSignIn = () => {
-    console.log('Google Sign In');
+    dispatch(startGoogleSignIn());
   }
 
   return (
