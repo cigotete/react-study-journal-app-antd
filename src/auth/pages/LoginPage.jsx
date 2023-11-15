@@ -4,6 +4,8 @@ import {
   GoogleOutlined
 } from '@ant-design/icons';
 import { AuthLayout } from '../layout/AuthLayout';
+import { useDispatch, useSelector } from 'react-redux';
+import { checkingAuthentication } from '../../store/auth'
 
 const validateMessages = {
   required: '${label} is required!',
@@ -14,9 +16,10 @@ const validateMessages = {
 
 export const LoginPage = () => {
   const [form] = Form.useForm();
+  const dispatch = useDispatch();
 
   const onFinish = (values) => {
-    console.log(values);
+    dispatch(checkingAuthentication());
   };
 
   const onReset = () => {
@@ -85,5 +88,4 @@ export const LoginPage = () => {
       </Space>
     </AuthLayout>
   );
-
 };
