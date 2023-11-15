@@ -12,13 +12,25 @@ const validateMessages = {
   },
 };
 
-const onFinish = (values) => {
-  console.log(values);
-};
+export const LoginPage = () => {
+  const [form] = Form.useForm();
 
-export const LoginPage = () => (
+  const onFinish = (values) => {
+    console.log(values);
+  };
+
+  const onReset = () => {
+    form.resetFields();
+  };
+
+  const onGoogleSignIn = () => {
+    console.log('Google Sign In');
+  }
+
+  return (
     <AuthLayout title="Login">
       <Form
+        form={ form }
         name="login"
         onFinish={ onFinish }
         validateMessages={ validateMessages }
@@ -56,7 +68,11 @@ export const LoginPage = () => (
             </Button>
         </Form.Item>
         <Form.Item>
-            <Button type="primary" htmlType="submit" icon={<GoogleOutlined />}>
+            <Button
+            onClick={ onGoogleSignIn }
+            type="primary"
+            icon={<GoogleOutlined />}
+            >
               Google
             </Button>
         </Form.Item>
@@ -68,4 +84,6 @@ export const LoginPage = () => (
       </Link>
       </Space>
     </AuthLayout>
-);
+  );
+
+};
