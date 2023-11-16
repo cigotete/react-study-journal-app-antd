@@ -55,6 +55,7 @@ export const RegisterPage = () => (
         >
           <Input.Password
             placeholder="input password"
+            autoComplete='off'
           />
         </Form.Item>
         <Space>
