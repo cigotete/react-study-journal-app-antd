@@ -21,7 +21,7 @@ export const RegisterPage = () => (
         validateMessages={ validateMessages }
       >
         <Form.Item
-          name="user name"
+          name="username"
           label="Username"
           rules={[
             {
