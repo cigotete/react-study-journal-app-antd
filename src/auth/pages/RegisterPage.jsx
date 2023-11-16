@@ -25,7 +25,6 @@ export const RegisterPage = () => (
           label="Username"
           rules={[
             {
-              type: 'text',
               required: true,
             },
           ]}
