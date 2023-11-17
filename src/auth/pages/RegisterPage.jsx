@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button, Form, Input, Space, Typography, Alert } from 'antd';
@@ -7,7 +8,9 @@ import { startCreatingUserWithEmailPassword } from '../../store/auth'
 export const RegisterPage = () => {
 
   const dispatch = useDispatch();
-  const { errorMessage } = useSelector(state => state.auth);
+  const { status, errorMessage } = useSelector(state => state.auth);
+  const isCheckingAuthentication = useMemo( () => status === 'checking', [status]);
+
   const validateMessages = {
     required: '${label} is required!',
     types: {
@@ -85,7 +88,11 @@ export const RegisterPage = () => {
         </Form.Item>
         <Space>
         <Form.Item>
-            <Button type="primary" htmlType="submit">
+            <Button
+            type="primary"
+            htmlType="submit"
+            disabled={ isCheckingAuthentication }
+            >
               Register
             </Button>
         </Form.Item>
