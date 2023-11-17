@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Button, Form, Input, Space, Typography } from 'antd';
+import { Button, Form, Input, Space, Typography, Alert } from 'antd';
 import { AuthLayout } from '../layout/AuthLayout';
 import { startCreatingUserWithEmailPassword } from '../../store/auth'
 
 export const RegisterPage = () => {
 
   const dispatch = useDispatch();
+  const { errorMessage } = useSelector(state => state.auth);
   const validateMessages = {
     required: '${label} is required!',
     types: {
@@ -29,6 +30,16 @@ export const RegisterPage = () => {
 
   return (
     <AuthLayout title="Register">
+      <Alert
+        message="Error"
+        description={ errorMessage }
+        type="error"
+        showIcon
+        style={{
+          display: !!errorMessage ? '' : 'none',
+          marginBottom: '1rem'
+        }}
+      />
       <Form
         name="register"
         onFinish={ onFinish }
