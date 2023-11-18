@@ -6,7 +6,11 @@ import {
   GoogleOutlined
 } from '@ant-design/icons';
 import { AuthLayout } from '../layout/AuthLayout';
-import { checkingAuthentication, startGoogleSignIn } from '../../store/auth'
+import {
+  checkingAuthentication,
+  startGoogleSignIn,
+  startLoginWithEmailPassword
+} from '../../store/auth'
 
 const validateMessages = {
   required: '${label} is required!',
@@ -23,7 +27,9 @@ export const LoginPage = () => {
   console.log('isAuthenticating', isAuthenticating);
 
   const onFinish = (values) => {
-    dispatch(checkingAuthentication());
+    const email = values.email;
+    const password = values.password;
+    dispatch(startLoginWithEmailPassword({ email, password }));
   };
 
   const onReset = () => {
