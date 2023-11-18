@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Button, Form, Input, Space } from 'antd';
+import { Button, Form, Input, Space, Alert } from 'antd';
 import {
   GoogleOutlined
 } from '@ant-design/icons';
@@ -21,7 +21,7 @@ const validateMessages = {
 
 export const LoginPage = () => {
   const [form] = Form.useForm();
-  const { status } = useSelector( state => state.auth );
+  const { status, errorMessage } = useSelector( state => state.auth );
   const dispatch = useDispatch();
   const isAuthenticating = useMemo(() => status === 'checking', [status]);
   console.log('isAuthenticating', isAuthenticating);
@@ -42,6 +42,16 @@ export const LoginPage = () => {
 
   return (
     <AuthLayout title="Login">
+      <Alert
+        message="Error"
+        description={ errorMessage }
+        type="error"
+        showIcon
+        style={{
+          display: !!errorMessage ? '' : 'none',
+          marginBottom: '1rem'
+        }}
+      />
       <Form
         form={ form }
         name="login"
